@@ -1,5 +1,8 @@
 require 'digest'
 require 'openssl'
+require 'json'
+require 'base64'
+require 'byebug'
 
 class EnqueueTokenPayload
   attr_reader :key, :relative_quality, :custom_data
@@ -11,11 +14,11 @@ class EnqueueTokenPayload
   end
 
   def encrypted_and_encoded(secret_key, token_identifier)
-    cipher = OpenSSL::Cipher::Cipher.new('AES-256-CBC')
+    cipher = OpenSSL::Cipher.new('AES-256-CBC')
     cipher.encrypt
-    cipher.key = Digest::SHA2.hexdigest(secret_key)
-    cipher.iv = Digest::MD5.hexdigest(token_identifier)
-    urlsafe_encode64(cipher.update(serialize) + cipher.final)
+    cipher.key = Digest::SHA2.digest(secret_key)
+    cipher.iv = Digest::MD5.digest(token_identifier)
+    Base64.urlsafe_encode64(cipher.update(serialize) + cipher.final, padding: false)
   end
 
   private
