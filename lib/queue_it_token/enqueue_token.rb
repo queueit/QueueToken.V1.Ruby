@@ -10,6 +10,7 @@ class EnqueueToken
     @customer_id = customer_id
     @event_id = event_id
     @ip_address = ip_address
+    @ip_forwared_for = ip_forwared_for
     @validity = validity
     @payload = payload || EnqueueTokenPayload.new
     @token_identifier = [token_identifier_prefix, SecureRandom.uuid].compact.join('~')
