@@ -4,7 +4,7 @@ require 'openssl'
 class EnqueueTokenPayload
   attr_reader :key, :relative_quality, :custom_data
 
-  def initialize(key:, relative_quality:, custom_data: {})
+  def initialize(key: nil, relative_quality: nil, custom_data: {})
     @key = key.freeze
     @relative_quality = relative_quality
     @custom_data = custom_data.freeze

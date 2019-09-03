@@ -1,15 +1,17 @@
 require 'digest'
+require 'securerandom'
 
 class EnqueueToken
   attr_reader :customer_id, :event_id, :ip_address, :ip_forwared_for, :validity, :payload, :token_identifier,
               :issued_at, :expire_at
 
-  def initialize(customer_id:, event_id:, ip_address:, ip_forwared_for:, validity:, payload:, token_identifier_prefix: nil)
+  def initialize(customer_id:, event_id: nil, ip_address: nil, ip_forwared_for: nil, validity: nil, payload: nil,
+                 token_identifier_prefix: nil)
     @customer_id = customer_id
     @event_id = event_id
     @ip_address = ip_address
     @validity = validity
-    @payload = payload
+    @payload = payload || EnqueueTokenPayload.new
     @token_identifier = [token_identifier_prefix, SecureRandom.uuid].compact.join('~')
     @issued_at = (Time.now.to_f * 1000).to_i
     @expire_at = @issued_at + validity unless validity.nil?
