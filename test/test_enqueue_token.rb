@@ -17,6 +17,26 @@ class EnqueueTokenTest < Minitest::Test
     assert_equal expected_signed_token, token
   end
 
+  def test_without_payload
+    expected_signed_token = 'eyJ0eXAiOiJRVDEiLCJlbmMiOiJBRVMyNTYiLCJpc3MiOjE1MzQ3MjMyMDAwMDAsImV4cCI6MTUzOTEyOTYwMDAw' \
+                            'MCwidGkiOiJhMjFkNDIzYS00M2ZkLTQ4MjEtODRmYS00MzkwZjZhMmZkM2UiLCJjIjoidGlja2V0YW5pYSIsImUi' \
+                            'OiJteWV2ZW50IiwiaXAiOiI1LjcuOC42IiwieGZmIjoiNDUuNjcuMi40LDM0LjU2LjMuMiJ9..wUOdVDIKlrIqum' \
+                            'pU33bShDPdvTkicRk3q4Z-Vs8epFc'
+
+    enqueue_token = EnqueueToken.new(
+      customer_id: 'ticketania',
+      token_identifier: 'a21d423a-43fd-4821-84fa-4390f6a2fd3e',
+      event_id: 'myevent',
+      issued_at: 1_534_723_200_000,
+      expire_at: 1_539_129_600_000,
+      ip_address: '5.7.8.6',
+      ip_forwared_for: '45.67.2.4,34.56.3.2'
+    )
+
+    token = enqueue_token.token('5ebbf794-1665-4d48-80d6-21ac34be7faedf9e10b3-551a-4682-bb77-fee59d6355d6')
+    assert_equal expected_signed_token, token
+  end
+
   def test_with_payload
     expected_signed_token = 'eyJ0eXAiOiJRVDEiLCJlbmMiOiJBRVMyNTYiLCJpc3MiOjE1MzQ3MjMyMDAwMDAsImV4cCI6MTUzOTEyOTYwMDAw' \
                             'MCwidGkiOiJhMjFkNDIzYS00M2ZkLTQ4MjEtODRmYS00MzkwZjZhMmZkM2UiLCJjIjoidGlja2V0YW5pYSIsImUi' \
