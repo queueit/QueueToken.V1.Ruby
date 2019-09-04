@@ -1,7 +1,7 @@
 require_relative 'queue_it_token/version'
 
+# Gem base module
 module QueueItToken
-  # Your code goes here...
 end
 
 require 'queue_it_token/enqueue_token'

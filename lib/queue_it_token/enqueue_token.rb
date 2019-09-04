@@ -3,7 +3,8 @@ require 'securerandom'
 require 'json'
 require 'base64'
 
-class EnqueueToken
+# Base class for creating a Queue-IT Token
+class QueueItToken::EnqueueToken
   attr_reader :customer_id, :event_id, :ip_address, :ip_forwared_for, :payload, :token_identifier,
               :issued_at, :expire_at
 

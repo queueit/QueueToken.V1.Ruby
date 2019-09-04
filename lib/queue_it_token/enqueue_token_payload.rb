@@ -4,7 +4,8 @@ require 'json'
 require 'base64'
 require 'byebug'
 
-class EnqueueTokenPayload
+# Represent a payload to be add in the Queue-IT token
+class QueueItToken::EnqueueTokenPayload
   attr_reader :key, :relative_quality, :custom_data
 
   def initialize(key: nil, relative_quality: nil, custom_data: {})
