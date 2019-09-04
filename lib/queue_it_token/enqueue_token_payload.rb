@@ -24,9 +24,10 @@ class EnqueueTokenPayload
   private
 
   def serialize
-    payload_json = custom_data.dup
+    payload_json = {}
     payload_json[:r] = @relative_quality unless @relative_quality.nil?
     payload_json[:k] = @key unless @key.nil?
+    payload_json[:cd] = custom_data unless custom_data.empty?
 
     payload_json.to_json
   end
