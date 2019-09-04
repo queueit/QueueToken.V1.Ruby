@@ -2,7 +2,6 @@ require 'digest'
 require 'openssl'
 require 'json'
 require 'base64'
-require 'byebug'
 
 # Represent a payload to be add in the Queue-IT token
 class QueueItToken::EnqueueTokenPayload
