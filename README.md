@@ -78,3 +78,6 @@ token = QueueItToken::EnqueueToken.new(
 
 The format of the token is `[header].[payload].[hash]` where each part is in Base64 (url encoded). The payload is AES 256 encrypted with the secret key supplied in the `.token(secret_key)` method. If the "e" key is provided in the header, the secret key on the event must be used. If no "e" key is provided the default key on the customer account must be used.
 The token is signed with SHA 256 using the same secret key.
+
+## Contributing
+Run tests with `rake test` command.

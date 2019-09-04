@@ -6,9 +6,6 @@ Metrics/MethodLength:
   Exclude:
     - test/**
 
-Metrics/ParameterLists:
-  CountKeywordArgs: false
-
 Style/ClassAndModuleChildren:
   Enabled: false
   

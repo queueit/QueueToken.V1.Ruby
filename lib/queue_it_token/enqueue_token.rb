@@ -5,23 +5,34 @@ require 'base64'
 
 # Base class for creating a Queue-IT Token
 class QueueItToken::EnqueueToken
-  def initialize(customer_id:, event_id: nil, ip_address: nil, ip_forwared_for: nil, payload: nil,
-                 token_identifier: nil, token_identifier_prefix: nil, issued_at: nil, expire_at: nil)
+  ##
+  # This class need a customer_id (Queue-IT account) and optionnals options:
+  # event_id: ID of the Queue-IT event
+  # ip_address: IP address of the user
+  # ip_forwared_for: IP addresses forwarded for
+  # payload: payload (QueueItToken::EnqueueTokenPayload)
+  # token_identifier: fixed token identifier
+  # token_identifier_prefix: prefix for generating random identifier
+  # issued_at: UNIX timestamp of issued date
+  # expire_at: UNIX timestamp of expiration date
+  def initialize(customer_id:, options: {})
     @customer_id = customer_id
-    @event_id = event_id
-    @ip_address = ip_address
-    @ip_forwared_for = ip_forwared_for
-    @payload = payload
-    @token_identifier = token_identifier || [token_identifier_prefix, SecureRandom.uuid].compact.join('~')
-    @issued_at = issued_at || (Time.now.to_f * 1000).to_i
-    @expire_at = expire_at
+    @event_id, @ip_address, @ip_forwared_for,
+    @payload, @expire_at = options.values_at(:event_id, :ip_address, :ip_forwared_for, :payload, :expire_at)
+
+    @token_identifier = options[:token_identifier] || random_token_identifier(options[:token_identifier_prefix])
+    @issued_at = options[:issued_at] || (Time.now.to_f * 1000).to_i
   end
 
   def token(secret_key)
     "#{token_serialized(secret_key)}.#{hash(secret_key)}"
   end
 
-  # private
+  private
+
+  def random_token_identifier(prefix)
+    [prefix, SecureRandom.uuid].compact.join('~')
+  end
 
   def token_serialized(secret_key)
     payload_encrypted = @payload.encrypted_and_encoded(secret_key, @token_identifier) unless @payload.nil?

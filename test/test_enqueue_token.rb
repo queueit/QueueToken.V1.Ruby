@@ -15,8 +15,10 @@ class EnqueueTokenTest < Minitest::Test
 
     enqueue_token = QueueItToken::EnqueueToken.new(
       customer_id: @customer_id,
-      token_identifier: @token_identifier,
-      issued_at: 1_534_723_200_000
+      options: {
+        token_identifier: @token_identifier,
+        issued_at: 1_534_723_200_000
+      }
     )
 
     token = enqueue_token.token(@secret)
@@ -31,12 +33,14 @@ class EnqueueTokenTest < Minitest::Test
 
     enqueue_token = QueueItToken::EnqueueToken.new(
       customer_id: @customer_id,
-      token_identifier: @token_identifier,
-      event_id: 'myevent',
-      issued_at: 1_534_723_200_000,
-      expire_at: 1_539_129_600_000,
-      ip_address: '5.7.8.6',
-      ip_forwared_for: '45.67.2.4,34.56.3.2'
+      options: {
+        token_identifier: @token_identifier,
+        event_id: 'myevent',
+        issued_at: 1_534_723_200_000,
+        expire_at: 1_539_129_600_000,
+        ip_address: '5.7.8.6',
+        ip_forwared_for: '45.67.2.4,34.56.3.2'
+      }
     )
 
     token = enqueue_token.token(@secret)
@@ -59,11 +63,13 @@ class EnqueueTokenTest < Minitest::Test
     )
     enqueue_token = QueueItToken::EnqueueToken.new(
       customer_id: @customer_id,
-      token_identifier: @token_identifier,
-      event_id: 'myevent',
-      issued_at: 1_534_723_200_000,
-      expire_at: 1_539_129_600_000,
-      payload: payload
+      options: {
+        token_identifier: @token_identifier,
+        event_id: 'myevent',
+        issued_at: 1_534_723_200_000,
+        expire_at: 1_539_129_600_000,
+        payload: payload
+      }
     )
 
     token = enqueue_token.token(@secret)
