@@ -5,9 +5,6 @@ require 'base64'
 
 # Base class for creating a Queue-IT Token
 class QueueItToken::EnqueueToken
-  attr_reader :customer_id, :event_id, :ip_address, :ip_forwared_for, :payload, :token_identifier,
-              :issued_at, :expire_at
-
   def initialize(customer_id:, event_id: nil, ip_address: nil, ip_forwared_for: nil, payload: nil,
                  token_identifier: nil, token_identifier_prefix: nil, issued_at: nil, expire_at: nil)
     @customer_id = customer_id
