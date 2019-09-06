@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Gem for implementing QueueIt Token V1'
   spec.homepage      = 'https://queue-it.com/'
 
-  spec.files         = `git ls-files -z`.split('\x0').reject do |f|
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
 
