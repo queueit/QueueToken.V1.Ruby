@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'queue_it_token/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'queue_it.queue_token.v1'
+  spec.name          = 'queue_it_token'
   spec.version       = QueueItToken::VERSION
   spec.authors       = ['QoQa services SA', 'Queue-it']
   spec.email         = ['dev@qoqa.com']
