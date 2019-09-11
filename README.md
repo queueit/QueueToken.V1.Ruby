@@ -1,37 +1,34 @@
-# Queue-it Queue Token SDK gem for Ruby 
+# Queue-it Queue Token SDK gem for Ruby
 The Queue-it Queue Token SDK is used to ensure that end users cannot enter the queue without a valid token and to be a container which can carry sensitive user information from integrating system into the queue.
 ## The Token
 The token consists of two parts. Firstly, a header containing non-sensitive metadata. Secondly the payload of the token. Both header and payload are in JSON format.
+
 ### Token Header
 ```
-{ 
-  "typ": "QT1",
-  "enc": "AES256",
-  "iss": 1526464517,
-  "exp": 1526524517,
-  "ti": "159aba3e-55e1-4f54-b6ee-e5b943d7e885",
-  "c": "ticketania", 
-  "e": "demoevent",
-  "ip": "75.86.129.4",
-  "xff": "45.67.2.4,34.56.3.2"
+{
+  "issued_at": 1526464517,
+  "expire_at": 1526524517,
+  "token_identifier": "159aba3e-55e1-4f54-b6ee-e5b943d7e885",
+  "customer_id": "ticketania",
+  "event_id": "demoevent",
+  "ip_address": "75.86.129.4",
+  "ip_forwared_for": "45.67.2.4,34.56.3.2"
 }
 ```
-- `typ`: The type of the token. Value must be "QFT1". Required.
-- `enc`: Payload encryption algorithm. Value must be "AES256". Required.
-- `iss`: NumericDate of when token was issued. Required.
-- `exp`: NumericDate of when token expires. Optional.
-- `ti`: Unique Token ID (e.g. uuid). Used to uniquely identify tokens and restrict replay attacks. Required.
-- `c`: The Customer ID of the issuer. Token will only be valid on events on this account. Required.
-- `e`: The Event ID. If provided, token will only be valid on this event. Optional.
-- `ip`: The IP address the user the token is issued to. If provided, the IP address is validated before issuing the token. Optional.
-- `xff`: The X-Forwarded-For headerof the request when the token is issued. If provided, the X-Forwarded-For header is validated before issuing the token. Optional.
+- `issued_at`: NumericDate of when token was issued. Required.
+- `expire_at`: NumericDate of when token expires. Optional.
+- `token_identifier`: Unique Token ID (e.g. uuid). Used to uniquely identify tokens and restrict replay attacks. Required.
+- `customer_id`: The Customer ID of the issuer. Token will only be valid on events on this account. Required.
+- `event_id`: The Event ID. If provided, token will only be valid on this event. Optional.
+- `ip_address`: The IP address the user the token is issued to. If provided, the IP address is validated before issuing the token. Optional.
+- `ip_forwared_for`: The X-Forwarded-For headerof the request when the token is issued. If provided, the X-Forwarded-For header is validated before issuing the token. Optional.
 
 ### Token Payload
 ```
-{ 
-  "r": 0.4578,
-  "k": "XKDI42W",
-  "cd": { "size": "medium" }
+{
+  "relative_quality": 0.4578,
+  "key": "XKDI42W",
+  "custom_data": { "size": "medium" }
 }
 ```
 - `relative_quality`: The relative quality of the key. Must be a decimal value. Used for determining the quality of the token. Optional
