@@ -34,9 +34,9 @@ The token consists of two parts. Firstly, a header containing non-sensitive meta
   "cd": { "size": "medium" }
 }
 ```
-- `r`: The relative quality of the key. Must be a decimal value. Used for determining the quality of the token. Optional
-- `k`: A unique key that holds value to the integrating system (e.g. email or user id). Used to restrict users from issuing multiple queue ids. Optional.
-- `cd`: Any custom data of the user. This is a set of key-value pairs. Optional
+- `relative_quality`: The relative quality of the key. Must be a decimal value. Used for determining the quality of the token. Optional
+- `key`: A unique key that holds value to the integrating system (e.g. email or user id). Used to restrict users from issuing multiple queue ids. Optional.
+- `custom_data`: Any custom data of the user. This is a set of key-value pairs. Optional
 
 ## Usage
 ```Ruby
