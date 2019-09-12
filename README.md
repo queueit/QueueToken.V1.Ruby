@@ -48,11 +48,13 @@ payload = QueueItToken::EnqueueTokenPayload.new(
 )
 enqueue_token = QueueItToken::EnqueueToken.new(
   customer_id: 'ticketania',
-  token_identifier: 'a21d423a-43fd-4821-84fa-4390f6a2fd3e',
-  event_id: 'myevent',
-  issued_at: 1_534_723_200_000,
-  expire_at: 1_539_129_600_000,
-  payload: payload
+  {
+    token_identifier: 'a21d423a-43fd-4821-84fa-4390f6a2fd3e',
+    event_id: 'myevent',
+    issued_at: 1_534_723_200_000,
+    expire_at: 1_539_129_600_000,
+    payload: payload
+  }
 )
 
 token = enqueue_token.token(secret_key)
@@ -64,7 +66,9 @@ A prefix for the token identifier can optionally be provided to restrict the use
 token_identifier_prefix = "AnfTDnpwazllYmnmgaCJ8tErV80YHv77ni5NgqQNhfWwxNqrNcHb"
 token = QueueItToken::EnqueueToken.new(
   customer_id: 'ticketania',
-  token_identifier_prefix: token_identifier_prefix
+  {
+    token_identifier_prefix: token_identifier_prefix
+   }
 )
 
 # token_identifier example: AnfTDnpwazllYmnmgaCJ8tErV80YHv77ni5NgqQNhfWwxNqrNcHb~e937ef0d-48ec-4ff7-866e-52033273cb3d
