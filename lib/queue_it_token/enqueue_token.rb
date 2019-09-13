@@ -5,6 +5,7 @@ require 'base64'
 
 # Base class for creating a Queue-IT Token
 class QueueItToken::EnqueueToken
+  attr_reader :token_identifier
   ##
   # This class need a customer_id (Queue-IT account) and optionnals options:
   # event_id: ID of the Queue-IT event
