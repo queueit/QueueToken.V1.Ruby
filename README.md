@@ -20,8 +20,8 @@ The token consists of two parts. Firstly, a header containing non-sensitive meta
 - `token_identifier`: Unique Token ID (e.g. uuid). Used to uniquely identify tokens and restrict replay attacks. Required.
 - `customer_id`: The Customer ID of the issuer. Token will only be valid on events on this account. Required.
 - `event_id`: The Event ID. If provided, token will only be valid on this event. Optional.
-- `ip_address`: The IP address the user the token is issued to. If provided, the IP address is validated before issuing the token. Optional.
-- `ip_forwared_for`: The X-Forwarded-For headerof the request when the token is issued. If provided, the X-Forwarded-For header is validated before issuing the token. Optional.
+- `ip_address`: The IP address of user the token is issued for. If provided, the IP address in the token is validated against the client IP before issuing a new Queue id. Optional.
+- `ip_forwared_for`: The X-Forwarded-For header of the request when the token is issued. Only used for logging. Optional.
 
 ### Token Payload
 ```
